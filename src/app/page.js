@@ -3,52 +3,6 @@ import './globals.css'
 import Link from 'next/link'
 
 export default function Home() {
-  const RoboFlow = () => {
-    const [formData, setFormData] = useState({
-      image: '',
-    });
-
-    const handleChange = (event) => {
-      setFormData({
-        ...formData,
-        [event.target.image]: event.target.value,
-      });
-      return (
-        console.log(event)
-      )
-    };
-
-    const loadImageBase64 = (event) => {
-        return new Promise((resolve, reject) => {
-            const reader = new FileReader();
-            reader.readAsDataURL(event);
-            reader.onload = () => resolve(reader.result);
-            reader.onerror = (error) => reject(error);
-        });
-    }
-    
-    const handleSubmit = async (event) => {
-        const image = await loadImageBase64(fileData);
-        event.preventDefault();
-        axios({
-            method: "POST",
-            url: "https://detect.roboflow.com/pohonsawit2/7",
-            params: {
-                api_key: "2PNqpkPLTX6glZUiAPGu"
-            },
-            data: image,
-            headers: {
-                "Content-Type": "application/x-www-form-urlencoded"
-            }
-        })
-        .then(function(response) {
-            console.log(response.data);
-        })
-        .catch(function(error) {
-            console.log(error.message);
-        });
-    };
-  };
   return (
     <main className="min-h-screen">
       {/* Hero */}
@@ -82,13 +36,6 @@ export default function Home() {
         <div className='flex justify-center mt-16'>
           <Link href="/profile" className='bg-[#282A1F] text-white px-5 py-3 rounded-lg'>Lanjut membaca</Link>
         </div>
-        <form onSubmit={RoboFlow.handleSubmit}>
-              <div>
-                <label>Gambar :</label>
-                <input type="file" name="image" onChange={RoboFlow.handleChange} />
-              </div>
-              <button type="submit">Submit</button>
-            </form>
       </div>
     </main>
   )

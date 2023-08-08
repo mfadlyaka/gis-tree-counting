@@ -16,7 +16,7 @@ export default function Product () {
 
             <div className="pt-28 flex items-center justify-center gap-3">
                 <div className="w-[300px] h-[200px] px-5 border-2 border-neutral-800 rounded-xl flex items-center justify-center">
-                    <button className="px-4 py-2 bg-neutral-800 text-white rounded-xl">Get Started</button>
+                    <a href="https://gis-tree-counting.chingukorlern.my.id" className="text-decoration-none px-4 py-2 bg-neutral-800 text-white rounded-xl">Get Started</a>
                 </div>
                 <div className="w-[300px] h-[200px] px-5 border-2 border-neutral-800 rounded-xl flex flex-col items-center justify-center gap-2">
                     <p className="font-semibold text-lg">Build Your Dataset</p>

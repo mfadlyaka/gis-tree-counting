@@ -1,0 +1,212 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Draw Rectangles on Image</title>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+</head>
+<body>
+    <div style="position: relative; display: inline-block;">
+        <img id="image" src="clipsawit1.png" alt="Image" style="width: 7760; height: 4888;">
+        <canvas id="canvas" style="position: absolute; top: 0; left: 0;"></canvas>
+    </div>
+
+    <script>
+        $(document).ready(function() {
+            const image = $("#image")[0];
+            const canvas = $("#canvas")[0];
+            const ctx = canvas.getContext("2d");
+
+            // Set canvas dimensions to match the image
+            canvas.width = $("#image").width();
+            canvas.height = $("#image").height();
+
+            const predictions = [
+                {
+                    "x": 4590.5,
+                    "y": 2322.0,
+                    "width": 297.0,
+                    "height": 236.0,
+                    "confidence": 0.5494790077209473,
+                    "class": "pohonsawit"
+                },
+                {
+                    "x": 4085.5,
+                    "y": 2983.5,
+                    "width": 387.0,
+                    "height": 301.0,
+                    "confidence": 0.5445661544799805,
+                    "class": "pohonsawit"
+                },
+                {
+                    "x": 4313.0,
+                    "y": 2494.0,
+                    "width": 320.0,
+                    "height": 240.0,
+                    "confidence": 0.530354917049408,
+                    "class": "pohonsawit"
+                },
+                {
+                    "x": 510.5,
+                    "y": 1822.0,
+                    "width": 315.0,
+                    "height": 212.0,
+                    "confidence": 0.5176241993904114,
+                    "class": "pohonsawit"
+                },
+                {
+                    "x": 2012.5,
+                    "y": 2135.0,
+                    "width": 427.0,
+                    "height": 314.0,
+                    "confidence": 0.5166611671447754,
+                    "class": "pohonsawit"
+                },
+                {
+                    "x": 4889.0,
+                    "y": 2417.5,
+                    "width": 350.0,
+                    "height": 257.0,
+                    "confidence": 0.5100176930427551,
+                    "class": "pohonsawit"
+                },
+                {
+                    "x": 5967.0,
+                    "y": 1361.5,
+                    "width": 420.0,
+                    "height": 343.0,
+                    "confidence": 0.48673510551452637,
+                    "class": "pohonsawit"
+                },
+                {
+                    "x": 2768.5,
+                    "y": 2234.0,
+                    "width": 337.0,
+                    "height": 276.0,
+                    "confidence": 0.46169495582580566,
+                    "class": "pohonsawit"
+                },
+                {
+                    "x": 3122.0,
+                    "y": 2357.0,
+                    "width": 348.0,
+                    "height": 252.0,
+                    "confidence": 0.46125635504722595,
+                    "class": "pohonsawit"
+                },
+                {
+                    "x": 3371.5,
+                    "y": 2156.5,
+                    "width": 385.0,
+                    "height": 263.0,
+                    "confidence": 0.45675796270370483,
+                    "class": "pohonsawit"
+                },
+                {
+                    "x": 4036.5,
+                    "y": 2689.5,
+                    "width": 345.0,
+                    "height": 291.0,
+                    "confidence": 0.45532655715942383,
+                    "class": "pohonsawit"
+                },
+                {
+                    "x": 7057.5,
+                    "y": 328.0,
+                    "width": 395.0,
+                    "height": 316.0,
+                    "confidence": 0.45080843567848206,
+                    "class": "pohonsawit"
+                },
+                {
+                    "x": 5374.5,
+                    "y": 1882.5,
+                    "width": 257.0,
+                    "height": 251.0,
+                    "confidence": 0.44869673252105713,
+                    "class": "pohonsawit"
+                },
+                {
+                    "x": 2154.0,
+                    "y": 2438.0,
+                    "width": 420.0,
+                    "height": 314.0,
+                    "confidence": 0.4326493442058563,
+                    "class": "pohonsawit"
+                },
+                {
+                    "x": 6807.0,
+                    "y": 1479.0,
+                    "width": 342.0,
+                    "height": 308.0,
+                    "confidence": 0.4243890345096588,
+                    "class": "pohonsawit"
+                },
+                {
+                    "x": 6287.5,
+                    "y": 1552.5,
+                    "width": 387.0,
+                    "height": 325.0,
+                    "confidence": 0.41999512910842896,
+                    "class": "pohonsawit"
+                },
+                {
+                    "x": 2308.5,
+                    "y": 3573.0,
+                    "width": 311.0,
+                    "height": 234.0,
+                    "confidence": 0.4182209372520447,
+                    "class": "pohonsawit"
+                },
+                {
+                    "x": 3184.0,
+                    "y": 2622.5,
+                    "width": 332.0,
+                    "height": 257.0,
+                    "confidence": 0.4105440676212311,
+                    "class": "pohonsawit"
+                },
+                {
+                    "x": 2975.0,
+                    "y": 4117.0,
+                    "width": 338.0,
+                    "height": 276.0,
+                    "confidence": 0.4046021103858948,
+                    "class": "pohonsawit"
+                }
+            ];
+
+            // Draw rectangles on the canvas
+            predictions.forEach(prediction => {
+                const x = prediction.x;
+                const y = prediction.y;
+                const width = prediction.width;
+                const height = prediction.height;
+                const classLabel = prediction.class;
+
+                ctx.strokeStyle = "purple";
+                ctx.lineWidth = 5;
+                ctx.strokeRect(x, y, width, height);
+
+                // Add text label
+                ctx.fillStyle = "blue";
+                ctx.font = "44px Arial";
+                ctx.fillText(`${classLabel}: ${prediction.confidence.toFixed(2)}`, x, y - 10);
+            });
+        });
+
+        // $(document).ready(function() {
+        //     const canvas = $("#canvas")[0];
+        //     const ctx = canvas.getContext("2d");
+
+        //     // Set canvas dimensions to match the image
+        //     canvas.width = $("#image").width();
+        //     canvas.height = $("#image").height();
+
+        //     // Draw a red rectangle on the canvas
+        //     ctx.strokeStyle = "red";
+        //     ctx.lineWidth = 2;
+        //     ctx.strokeRect(100, 100, 200, 150);
+        // });
+    </script>
+</body>
+</html>
