@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Draw Rectangles on Image</title>
+</head>
+<body>
+    <div style="position: relative; display: inline-block;">
+        <img id="image" src="clipsawit.png" alt="Image" style="max-width: 100%;">
+        <canvas id="canvas" style="position: absolute; top: 0; left: 0;"></canvas>
+    </div>
+
+    <script>
+        const image = document.getElementById("image");
+        const canvas = document.getElementById("canvas");
+        const ctx = canvas.getContext("2d");
+
+        // Set canvas dimensions to match the image
+        canvas.width = image.width;
+        canvas.height = image.height;
+
+        const predictions = [
+            {
+                "x": 4590.5,
+                "y": 2322.0,
+                "width": 297.0,
+                "height": 236.0,
+                "confidence": 0.5494790077209473,
+                "class": "pohonsawit"
+            },
+            {
+                "x": 4085.5,
+                "y": 2983.5,
+                "width": 387.0,
+                "height": 301.0,
+                "confidence": 0.5445661544799805,
+                "class": "pohonsawit"
+            }
+        ];
+
+        // Draw rectangles on the canvas
+        predictions.forEach(prediction => {
+            const x = prediction.x;
+            const y = prediction.y;
+            const width = prediction.width;
+            const height = prediction.height;
+            const classLabel = prediction.class;
+
+            ctx.strokeStyle = "green";
+            ctx.lineWidth = 2;
+            ctx.strokeRect(x, y, width, height);
+
+            // Add text label
+            ctx.fillStyle = "green";
+            ctx.font = "14px Arial";
+            ctx.fillText(`${classLabel}: ${prediction.confidence.toFixed(2)}`, x, y - 10);
+        });
+    </script>
+</body>
+</html>

@@ -1,0 +1,13 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+.Hero {
+  background-image: linear-gradient(rgba(0,0,0,0.4), rgba(0,0,0,0.4)), url("/assets/big/bg-image.png");
+
+  @apply bg-center bg-cover
+}
+
+.Hero > div > p {
+  text-shadow:  0px 4px 20px rgba(0, 0, 0, 0.50);
+}
