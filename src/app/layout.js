@@ -31,6 +31,7 @@ export default function RootLayout({ children }) {
               <Link href="/" className={pathname === '/' ? 'border-b-[3px] transition-all duration-500 border-white px-2 py-1' : 'border-b-[3px] transition-all duration-500 border-transparent px-2 py-1'}>Home</Link>
               <Link href="/product" className={pathname === '/product' ? 'border-b-[3px] transition-all duration-500 border-neutral-800 px-2 py-1' : 'border-b-[3px] transition-all duration-500 border-transparent px-2 py-1'}>Product</Link>
               <Link href="/profile" className={pathname === '/profile' ? 'border-b-[3px] transition-all duration-500 border-neutral-800 px-2 py-1' : 'border-b-[3px] transition-all duration-500 border-transparent px-2 py-1'}>Profile</Link>
+              <Link href="/get-started" className={pathname === '/get-started' ? 'border-b-[3px] transition-all duration-500 border-neutral-800 px-2 py-1' : 'border-b-[3px] transition-all duration-500 border-transparent px-2 py-1'}>Get Started</Link>
             </div>
           </div>
         </nav>
