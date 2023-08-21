@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Roboflow API Example</title>
+</head>
+<body>
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+    <script>
+        // Replace with your Roboflow API key
+        const apiKey = "2PNqpkPLTX6glZUiAPGu";
+
+        // Function to predict using Roboflow API
+        async function predictImage() {
+            const imageUrl = "/assets/medium/c3.png"; // Replace with your image URL
+            const confidence = 40;
+            const overlap = 30;
+
+            const apiUrl = `https://api.roboflow.com/predict/${apiKey}/pohonsawit2/7`;
+            const response = await axios.post(apiUrl, {
+                image: imageUrl,
+                options: {
+                    confidence,
+                    overlap
+                }
+            });
+
+            console.log(response.data);
+
+            // Visualize your prediction
+            const predictionImageUrl = response.data.prediction;
+            const predictionImage = new Image();
+            predictionImage.src = predictionImageUrl;
+            document.body.appendChild(predictionImage);
+
+            // Display predictions
+            const predictionsData = [
+                // Replace this array with your actual predictions data
+                {
+                    "x": 7904,
+                    "y": 5248.5,
+                    "width": 318,
+                    "height": 161,
+                    "confidence": 0.675,
+                    "class": "pohonsawit"
+                },
+                {
+                    "x": 8568.5,
+                    "y": 5249,
+                    "width": 381,
+                    "height": 160,
+                    "confidence": 0.647,
+                    "class": "pohonsawit"
+                },
+                {
+                    "x": 5412,
+                    "y": 5252,
+                    "width": 346,
+                    "height": 154,
+                    "confidence": 0.635,
+                    "class": "pohonsawit"
+                }
+            ];
+
+            predictionsData.forEach(prediction => {
+                const boundingBox = document.createElement("div");
+                boundingBox.style.position = "absolute";
+                boundingBox.style.left = `${prediction.x}px`;
+                boundingBox.style.top = `${prediction.y}px`;
+                boundingBox.style.width = `${prediction.width}px`;
+                boundingBox.style.height = `${prediction.height}px`;
+                boundingBox.style.border = "2px solid red";
+                document.body.appendChild(boundingBox);
+
+                const confidenceLabel = document.createElement("p");
+                confidenceLabel.style.position = "absolute";
+                confidenceLabel.style.left = `${prediction.x}px`;
+                confidenceLabel.style.top = `${prediction.y - 20}px`;
+                confidenceLabel.style.margin = 0;
+                confidenceLabel.style.padding = 0;
+                confidenceLabel.style.color = "red";
+                confidenceLabel.innerText = `Confidence: ${prediction.confidence}`;
+                document.body.appendChild(confidenceLabel);
+            });
+        }
+
+        predictImage();
+    </script>
+</body>
+</html>

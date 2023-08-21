@@ -249,7 +249,7 @@ export default function getStarted() {
               headers: {
                 "Content-Type": "application/x-www-form-urlencoded",
                 "Access-Control-Allow-Origin": "*",
-                "Access-Control-Allow-Credentials": "true"
+                // "Access-Control-Allow-Credentials": "true"
               }
             })
             .then(function(response) {
