@@ -1,4 +1,3 @@
-import axios from 'axios';
 import './globals.css'
 import Link from 'next/link'
 
